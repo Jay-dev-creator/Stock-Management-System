@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block body %} {% load crispy_forms_tags %}
+<div class="jumbotron">
+  <h1>{{title}}</h1>
+  <form method="POST" action="">
+    {% csrf_token %} {{form|crispy}}
+    <input type="submit" value="Create Report" class="btn btn-primary mb-2" />
+  </form>
+  <div class="display_table">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ITEM NAME</th>
+          <th>QUANTITY IN STORE</th>
+          <th>ISSUED QUANTITY</th>
+          <th>ISSUE TO</th>
+          <th>DATE</th>
+        </tr>
+      </thead>
+      {% for instance in queryset %}
+      <tr>
+        <td>{{instance.id}}</td>
+        <td>{{instance.item_name}}</td>
+        <td>{{instance.quantity}}</td>
+        <td>{{instance.issue_quantity}}</td>
+        <td>{{instance.issue_to}}</td>
+        <td>{{instance.timestamp}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
